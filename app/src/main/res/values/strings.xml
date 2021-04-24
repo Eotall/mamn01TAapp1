@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">mamn01TAapp1</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Send</string>
+    <string name="button_acc">Accelerometer values</string>
+    <string name="button_comp">Compass</string>
+</resources>
