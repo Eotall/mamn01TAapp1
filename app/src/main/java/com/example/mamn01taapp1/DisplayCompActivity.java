@@ -22,7 +22,7 @@ public class DisplayCompActivity extends AppCompatActivity implements SensorEven
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_display_comp);
 
         compass = (ImageView) findViewById(R.id.compassView);
         headingText = (TextView) findViewById(R.id.headingText);
@@ -32,7 +32,7 @@ public class DisplayCompActivity extends AppCompatActivity implements SensorEven
     @Override
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
@@ -43,10 +43,15 @@ public class DisplayCompActivity extends AppCompatActivity implements SensorEven
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-
-        // get the angle around the z-axis rotated
-        float degree = Math.round(event.values[0]);
+        float degree = Math.round(event.values[0] * 10000) / 10000;
         headingText.setText("Heading: " + Float.toString(degree) + " degrees");
+
+        // change picture based on rotation
+        if (Math.abs(degree) <= 15f) {
+            compass.setImageResource(R.drawable.compass_icon_north);
+        } else {
+            compass.setImageResource(R.drawable.compass_icon);
+        }
 
         // create a rotation animation (reverse turn degree degrees)
         RotateAnimation ra = new RotateAnimation(

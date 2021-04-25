@@ -21,7 +21,7 @@ public class DisplayAccActivity extends AppCompatActivity implements SensorEvent
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_display_acc);
         x = 0;
         y = 0;
         z = 0;
@@ -30,7 +30,7 @@ public class DisplayAccActivity extends AppCompatActivity implements SensorEvent
         yText = (TextView) findViewById(R.id.yText);
         zText = (TextView) findViewById(R.id.zText);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
     }
 
     @Override
